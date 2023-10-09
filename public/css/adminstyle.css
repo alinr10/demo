@@ -1,3 +1,4 @@
+/* Genel stil ayarları */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -40,34 +41,48 @@ body {
     box-sizing: border-box;
 }
 
-/* Temel buton stilini belirtmek için */
-.button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #4caf50;
-    color: #fff;
-    text-decoration: none;
+/* Form ve liste stilleri */
+form input,
+form textarea {
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
     border-radius: 5px;
+    box-sizing: border-box;
 }
 
+.button {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
-/* ... (Daha önce verdiğim CSS kodları) ... */
+.button:hover {
+    background-color: #45a049;
+}
 
-.category-list {
+.post-list {
     list-style: none;
     padding: 0;
 }
 
-.category-list li {
-    margin-bottom: 10px;
+.post-list li {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
 }
 
-.category-list li a {
+.post-list li a {
     margin-left: 10px;
     color: #4caf50;
     text-decoration: none;
 }
 
-.category-list li a:hover {
+.post-list li a:hover {
     text-decoration: underline;
 }

@@ -1,60 +1,30 @@
-const express=require('express')
-const path=require('path')
-const app=express()
-const port=3000
-const exphbs = require('express-handlebars');
+const express = require("express");
+const path = require("path");
+const app = express();
+const port = 3000;
+const exphbs = require("express-handlebars");
+const mongoose = require("mongoose");
+const bodyParser = require('body-parser')
 
+app.use(express.static("public"));
 
-app.use(express.static('public'))
+app.engine("handlebars", exphbs.engine());
 
-app.engine('handlebars', exphbs.engine())
+app.set("view engine", "handlebars");
 
-app.set('view engine', 'handlebars');
+mongoose.connect("mongodb://127.0.0.1/demo_", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
+app.use(bodyParser.urlencoded({ extended: false }))
 
-app.get("/",(req,res)=>{
+app.use(bodyParser.json())
 
-res.render('site/index')
-
-
-})
-
-app.get("/about",(req,res)=>{
-
-    res.render('site/about')
-    
-    
-    })
-    app.get("/blog",(req,res)=>{
-
-        res.render('site/blog')
-        
-        
-        })
-        app.get("/contact",(req,res)=>{
-
-            res.render('site/contact')
-            
-            
-            })
-            app.get("/blog-single",(req,res)=>{
-
-                res.render('site/blog-single')
-                
-                
-                })
-
-                app.get('/login', (req, res) => {
-                    res.render('login', { layout: null });
-                });
-                app.get('/admin', (req, res) => {
-                    res.render('site/admin', { layout: null });
-                });
-
-                app.get('/category', (req, res) => {
-                    res.render('site/category', { layout: null });
-                });
-
-app.listen(port,()=>{
-    console.log(`Sunucu ${port} numaralı portta çalışıyor`)
-})
+const main=require('./routes/main')
+const posts=require('./routes/posts')
+    app.use("/",main)
+    app.use("/posts",posts)
+app.listen(port, () => {
+  console.log(`Sunucu ${port} numaralı portta çalışıyor`);
+});
