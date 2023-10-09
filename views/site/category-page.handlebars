@@ -18,7 +18,7 @@
             <div class="col-md-6">
               <div class="blog">
                 <div class="blog-img">
-                  <img src="{{post_image}}" class="img-fluid" />
+                  <img src="/{{post_image}}" class="img-fluid" />
                 </div>
                 <div class="blog-content">
                   <ul class="blog-meta">
@@ -73,7 +73,7 @@
           <div class="widget-category">
     {{#each categories}} 
 
-            <a href="/blog/{{this._id}}">{{this.name}}</a>
+            <a href="#">{{this.name}}</a>
 
     {{/each}} 
             {{!-- <a href="#">Marketing<span>(142)</span></a>
@@ -94,7 +94,7 @@
               <a href="#">
                 <img
                   class="img-fluid"
-                  img src="{{post_image}}"
+                  img src="/{{post_image}}"
                   alt=""
                 />{{this.title}}
               </a>

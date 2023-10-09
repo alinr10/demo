@@ -8,6 +8,15 @@ const BlogPost = new Schema({
   content: { type: String, require: true },
 
   date: { type: Date, default: Date.now },
+
+  post_image: {
+    type: String,
+    require: true,
+  },
+  author: { type: String, require: true },
+
+  category:{type:String,require:true}
+
 });
 
 module.exports = mongoose.model("post", BlogPost);

@@ -1,51 +1,60 @@
-<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
     <title>Yazılar</title>
-    <link rel="stylesheet" href="css/adminstyle.css">
-</head>
+    <link rel="stylesheet" href="css/adminstyle.css" />
+  </head>
 
-<body>
+  <body>
     <div class="admin-panel">
-        <div class="sidebar">
-            <h2>Admin Panel</h2>
-            <ul>
-                <li><a href="#">Ana Sayfa</a></li>
-                <li><a href="posts">Postlar</a></li>
-                <li><a href="category">Kategoriler</a></li>
-                <li><a href="#">Ayarlar</a></li>
-            </ul>
-        </div>
-        <div class="content">
-            <h2>Yazılar</h2>
+      <div class="sidebar">
+        <h2>Admin Panel</h2>
+        <ul>
+          <li><a href="#">Ana Sayfa</a></li>
+          <li><a href="posts">Postlar</a></li>
+          <li><a href="category">Kategoriler</a></li>
+          <li><a href="#">Ayarlar</a></li>
+        </ul>
+      </div>
+      <div class="content">
+        <h2>Yazılar</h2>
 
-            <h3>Yeni Post Ekle</h3>
-            <form action="/posts" method="post">
+        <h3>Yeni Post Ekle</h3>
+        <form action="/posts" method="post" enctype="multipart/form-data" >
+               
+          <input type="text" name="title" placeholder="Başlık" required />
+          <textarea name="content" placeholder="İçerik" required></textarea>
+          
+        <input type="text" name="author" placeholder="Yazar" required />
 
-                <input type="text" name="title" placeholder="Başlık" required>
-                <textarea name="content" placeholder="İçerik" required></textarea>
-                <button class="button" type="submit">Ekle</button>
-            
-            
-            
-            </form>
+          <input type="file" id="myFile" name="post_image" />
 
-            <h3>Mevcut Yazılar</h3>
-            <ul class="post-list">
-                {{#each posts}}
-                <li>
-                    <strong>{{this.title}}</strong>
-                    <p>{{this.content}}</p>
-                    <a href="/posts/edit/{{this.id}}">Düzenle</a>
-                    <a href="/posts/delete/{{this.id}}">Sil</a>
-                </li>
-                {{/each}}
-            </ul>
-        </div>
+<br>
+           <label for="category">Kategori:</label>
+  <select name="category" id="category">
+    {{#each categories}}
+      <option value="{{this._id}}">{{this.name}}</option>
+    {{/each}}
+  </select>
+          <br />
+          <button class="button" type="submit">Ekle</button>
+        </form>
+        <h3>Mevcut Yazılar</h3>
+        <ul class="post-list">
+          {{#each post}}
+            <li>
+              <strong>{{title}}</strong>
+              <p>{{content}}</p>
+              <a href="/posts/edit/{{_id}}">Düzenle</a>
+              <a href="/posts/delete/{{_id}}">Sil</a>
+            </li> 
+          {{/each}}
+        </ul>
+      </div>
     </div>
-</body>
-
+  </body>
 </html>

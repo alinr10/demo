@@ -1,13 +1,11 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Kategoriler</title>
     <link rel="stylesheet" href="css/adminstyle.css">
 </head>
-
 <body>
     <div class="admin-panel">
         <div class="sidebar">
@@ -24,7 +22,7 @@
 
             <h3>Kategori Ekle</h3>
             <form action="/categories" method="post">
-                <input type="text" name="categoryName" placeholder="Kategori Adı" required>
+                <input type="text" name="name" placeholder="Kategori Adı" required>
                 <button class="button" type="submit">Ekle</button>
             </form>
 
@@ -32,9 +30,9 @@
             <ul class="category-list">
                 {{#each categories}}
                 <li>
-                    {{this.name}}
-                    <a href="/categories/edit/{{this.id}}">Düzenle</a>
-                    <a href="/categories/delete/{{this.id}}">Sil</a>
+                    {{name}}
+                    <a href="/categories/edit/{{id}}">Düzenle</a>
+                    <a href="/categories/delete/{{id}}">Sil</a>
                 </li>
                 {{/each}}
             </ul>
