@@ -1,23 +1,24 @@
-/* eslint-disable linebreak-style */
 const express = require('express');
-
 const router = express.Router();
 const Categories = require('../models/Categories');
 const Post = require('../models/Post');
+const checkAuth = require('../checkauth');
 
-router.post('/categories', (req, res) => {
+
+
+router.post('/categories', checkAuth,(req, res) => {
   Categories.create(req.body);
 
   res.redirect('/category');
 });
 
-router.get('/categories/edit/:id', (req, res) => {
+router.get('/categories/edit/:id',checkAuth, (req, res) => {
   const editid = req.params.id;
 
   res.render('site/category-edit', { layout: null, editid });
 });
 
-router.post('/categories/edit/:id', async (req, res) => {
+router.post('/categories/edit/:id',checkAuth, async (req, res) => {
   const { name } = req.body; // "name" alanını req.body içinden alıyoruz
 
   try {
@@ -54,7 +55,7 @@ router.get('/blog/:category', async (req, res) => {
 
 
 
-router.get('/categories/delete/:id', async (req, res) => {
+router.get('/categories/delete/:id',checkAuth, async (req, res) => {
   try {
     const deletedCategori = await Categories.findByIdAndDelete(req.params.id);
 

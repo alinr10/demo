@@ -16,7 +16,7 @@
 </head>
 
 <body>
-  <div class="container">
+    <div class="container">
         <h2>Yazıyı Düzenle</h2>
         <form action="/posts/edit/{{postId}}" method="post" enctype="multipart/form-data">
             <div class="form-group">
@@ -26,6 +26,23 @@
             <div class="form-group">
                 <label for="content">İçerik:</label>
                 <textarea class="form-control" name="content" rows="5" placeholder="İçerik"></textarea>
+                <br>
+                <label for="author">Yazar : </label> <br>
+                <input type="text" name="author" placeholder="Yazar" required />
+
+                <br> <br>
+                <input type="file" id="myFile" name="post_image" />
+
+                <br> <br>
+                <label for="category">Kategori:</label>
+                <select name="category" id="category">
+                    {{#each categories}}
+                    <option value="{{this._id}}">{{this.name}}</option>
+                    {{/each}}
+                </select>
+
+
+
             </div>
             <button type="submit" class="btn btn-primary">Güncelle</button>
         </form>

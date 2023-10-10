@@ -1,60 +1,59 @@
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <title>Yazılar</title>
-    <link rel="stylesheet" href="css/adminstyle.css" />
-  </head>
 
-  <body>
-    <div class="admin-panel">
-      <div class="sidebar">
-        <h2>Admin Panel</h2>
-        <ul>
-          <li><a href="#">Ana Sayfa</a></li>
-          <li><a href="posts">Postlar</a></li>
-          <li><a href="category">Kategoriler</a></li>
-          <li><a href="#">Ayarlar</a></li>
-        </ul>
-      </div>
-      <div class="content">
-        <h2>Yazılar</h2>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Yazılar</title>
+  <link rel="stylesheet" href="css/adminstyle.css" />
+</head>
 
-        <h3>Yeni Post Ekle</h3>
-        <form action="/posts" method="post" enctype="multipart/form-data" >
-               
-          <input type="text" name="title" placeholder="Başlık" required />
-          <textarea name="content" placeholder="İçerik" required></textarea>
-          
+<body>
+  <div class="admin-panel">
+    <div class="sidebar">
+      <h2>Admin Panel</h2>
+      <ul>
+        <li><a href="admin">Ana Sayfa</a></li>
+        <li><a href="posts">Postlar</a></li>
+        <li><a href="category">Kategoriler</a></li>
+        <li><a href="#">Ayarlar</a></li>
+      </ul>
+    </div>
+    <div class="content">
+      <h2>Yazılar</h2>
+
+      <h3>Yeni Post Ekle</h3>
+      <form action="/posts" method="post" enctype="multipart/form-data">
+
+        <input type="text" name="title" placeholder="Başlık" required />
+        <textarea name="content" placeholder="İçerik" required></textarea>
+
         <input type="text" name="author" placeholder="Yazar" required />
 
-          <input type="file" id="myFile" name="post_image" />
+        <input type="file" id="myFile" name="post_image" />
 
-<br>
-           <label for="category">Kategori:</label>
-  <select name="category" id="category">
-    {{#each categories}}
-      <option value="{{this._id}}">{{this.name}}</option>
-    {{/each}}
-  </select>
-          <br />
-          <button class="button" type="submit">Ekle</button>
-        </form>
-        <h3>Mevcut Yazılar</h3>
-        <ul class="post-list">
-          {{#each post}}
-            <li>
-              <strong>{{title}}</strong>
-              <p>{{content}}</p>
-              <a href="/posts/edit/{{_id}}">Düzenle</a>
-              <a href="/posts/delete/{{_id}}">Sil</a>
-            </li> 
+        <br>
+        <label for="category">Kategori:</label>
+        <select name="category" id="category">
+          {{#each categories}}
+          <option value="{{this._id}}">{{this.name}}</option>
           {{/each}}
-        </ul>
-      </div>
+        </select>
+        <br />
+        <button class="button" type="submit">Ekle</button>
+      </form>
+      <h3>Mevcut Yazılar</h3>
+      <ul class="post-list">
+        {{#each post}}
+        <li>
+          <strong>{{title}}</strong>
+          <p>{{content}}</p>
+          <a href="/posts/edit/{{_id}}">Düzenle</a>
+          <a href="/posts/delete/{{_id}}">Sil</a>
+        </li>
+        {{/each}}
+      </ul>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
