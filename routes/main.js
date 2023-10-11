@@ -41,13 +41,31 @@ router.get('/admin', checkAuth,(req, res) => {
  
 });
 
-router.get('/posts', checkAuth,async (req, res) => {
+router.get("/posts",checkAuth,async (req,res)=>{
+try{
+const posts= await Post.find({})
+
+res.render("site/posts",{posts:posts,layout:null})
+
+
+}catch(error){
+console.error(error);
+  res.status(500).send(`Bir hata oluştu: ${error.message}`); // Hata durumunda uygun bir hata mesajı gönder
+}
+
+
+
+
+})
+
+
+router.get('/add-post', checkAuth,async (req, res) => {
 
 try{
   const post = await Post.find({});
 
   const categories = await Categories.find({});
-  res.render('site/post', { layout: null, post, categories });
+  res.render('site/add-post', { layout: null, post, categories });
 }catch (error) {
   console.error(error);
   res.status(500).send(`Bir hata oluştu: ${error.message}`); // Hata durumunda uygun bir hata mesajı gönder

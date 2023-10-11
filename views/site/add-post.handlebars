@@ -1,0 +1,50 @@
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Yazılar</title>
+  <link rel="stylesheet" href="css/adminstyle.css" />
+</head>
+
+<body>
+  <div class="admin-panel">
+    <div class="sidebar">
+      <h2>Admin Panel</h2>
+      <ul>
+        <li><a href="admin">Ana Sayfa</a></li>
+        <li><a href="add-post">Post ekle</a></li>
+        <li><a href="posts">Postlar</a></li>
+        <li><a href="category">Kategoriler</a></li>
+        <li><a href="#">Ayarlar</a></li>
+      </ul>
+    </div>
+    <div class="content">
+      <h2>Yazılar</h2>
+
+      <h3>Yeni Post Ekle</h3>
+      <form action="/posts" method="post" enctype="multipart/form-data">
+
+        <input type="text" name="title" placeholder="Başlık" required />
+        <textarea name="content" placeholder="İçerik" required></textarea>
+
+        <input type="text" name="author" placeholder="Yazar" required />
+
+        <input type="file" id="myFile" name="post_image" />
+
+        <br>
+        <label for="category">Kategori:</label>
+        <select name="category" id="category">
+          {{#each categories}}
+          <option value="{{this._id}}">{{this.name}}</option>
+          {{/each}}
+          
+        </select>
+        <br /> <br>
+        <button class="button" type="submit">Ekle</button>
+      </form>
+  
+    </div>
+  </div>
+</body>
+</html>

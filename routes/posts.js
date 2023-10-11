@@ -1,5 +1,4 @@
 const express = require('express');
-
 const router = express.Router();
 const path = require('path');
 const Post = require('../models/Post');
@@ -20,7 +19,7 @@ router.post('/', checkAuth, (req, res) => {
 
 router.get('/:id', async (req, res) => {
 try{
-    const post = await Post.findById(req.params.id);
+  const post = await Post.findById(req.params.id);
   const posts = await Post.find({});
   const categories = await Categories.find({});
   res.render('site/blog-single', {
@@ -32,14 +31,9 @@ try{
   console.error(error);
   res.status(500).send(`Bir hata oluştu: ${error.message}`); // Hata durumunda uygun bir hata mesajı gönder
 }
-
-
 });
-
 const mongoose = require('mongoose');
 const Categories = require('../models/Categories');
-
-// ...
 
 router.post('/edit', async (req, res) => {
   try {
@@ -56,7 +50,6 @@ router.post('/edit', async (req, res) => {
     if (!updatedPost) {
       return res.status(404).send('Güncellenecek post bulunamadı.');
     }
-
     console.log(`Post with ID ${postId} has been updated.`);
     res.redirect('/posts'); // Güncelleme işlemi başarılıysa isteği yönlendir
   } catch (error) {
@@ -64,5 +57,4 @@ router.post('/edit', async (req, res) => {
     res.status(500).send(`Bir hata oluştu: ${error.message}`); // Hata durumunda uygun bir hata mesajı gönder
   }
 });
-
 module.exports = router;
