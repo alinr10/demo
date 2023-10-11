@@ -1,11 +1,11 @@
 const express = require('express');
 
 const router = express.Router();
-const Post = require('../models/Post');
 const path = require('path');
-const checkAuth =require('../checkauth')
+const Post = require('../models/Post');
+const checkAuth = require('../checkauth');
 
-router.post('/', checkAuth,(req, res) => {
+router.post('/', checkAuth, (req, res) => {
   const { post_image } = req.files;
 
   post_image.mv(
@@ -19,14 +19,21 @@ router.post('/', checkAuth,(req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-  const post = await Post.findById(req.params.id);
+try{
+    const post = await Post.findById(req.params.id);
   const posts = await Post.find({});
-  const categories=await Categories.find({})
+  const categories = await Categories.find({});
   res.render('site/blog-single', {
     post,
     posts,
-    categories
+    categories,
   });
+}catch (error) {
+  console.error(error);
+  res.status(500).send(`Bir hata oluştu: ${error.message}`); // Hata durumunda uygun bir hata mesajı gönder
+}
+
+
 });
 
 const mongoose = require('mongoose');

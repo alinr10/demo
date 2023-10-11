@@ -1,56 +1,90 @@
 <!-- edit-post.html -->
 
-<!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
     <title>Yazıyı Düzenle</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
     <style>
-        .container {
-            margin-top: 50px;
-        }
+      .container { margin-top: 50px; }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="container">
-        <h2>Yazıyı Düzenle</h2>
-        <form action="/posts/edit/{{postId}}" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="title">Başlık:</label>
-                <input type="text" class="form-control" name="title" placeholder="Başlık">
-            </div>
-            <div class="form-group">
-                <label for="content">İçerik:</label>
-                <textarea class="form-control" name="content" rows="5" placeholder="İçerik"></textarea>
-                <br>
-                <label for="author">Yazar : </label> <br>
-                <input type="text" name="author" placeholder="Yazar" required />
+      <h2>Yazıyı Düzenle</h2>
+      <form
+        action="/posts/edit/{{postId}}"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <div class="form-group">
 
-                <br> <br>
-                <input type="file" id="myFile" name="post_image" />
+          <label for="title">Başlık:</label>
+          <textarea
+            class="form-control"
+            name="title"
+            rows="1"
+            placeholder="Başlık"
+          >{{post.title}}</textarea>
 
-                <br> <br>
-                <label for="category">Kategori:</label>
-                <select name="category" id="category">
-                    {{#each categories}}
-                    <option value="{{this._id}}">{{this.name}}</option>
-                    {{/each}}
-                </select>
+        </div>
+        <div class="form-group">
+          <label for="content">İçerik:</label>
+          <textarea
+            class="form-control"
+            name="content"
+            rows="5"
+            placeholder="İçerik"
+          >{{post.content}}</textarea>
+          <br />
+          <label for="author">Yazar : </label>
+          <br />
 
+          <input
+            type="text"
+            name="author"
+            placeholder="Yazar"
+            value="{{post.author}}"
+            required
+          />
 
+          <br />
+          <br />
+          <input
+            type="file"
+            id="myFile"
+            name="post_image"
+            value="{{post_image}}"
+          />
 
-            </div>
-            <button type="submit" class="btn btn-primary">Güncelle</button>
-        </form>
+          <br />
+          <br />
+          <label for="category">Kategori:</label>
+          <select name="category" id="category">
+            {{#each categories}}
+              <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Güncelle</button>
+      </form>
     </div>
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    ></script>
+  </body>
 
 </html>

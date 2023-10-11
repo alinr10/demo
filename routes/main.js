@@ -34,15 +34,6 @@ router.get('/blog', async (req, res) => {
 router.get('/contact', (req, res) => {
   res.render('site/contact');
 });
-// router.get("/blog-single", (req, res) => {
-//   res.render("site/blog-single");
-// });
-
-
-
-
-
-
 
 router.get('/admin', checkAuth,(req, res) => {
   console.log(req.session);
@@ -51,10 +42,16 @@ router.get('/admin', checkAuth,(req, res) => {
 });
 
 router.get('/posts', checkAuth,async (req, res) => {
+
+try{
   const post = await Post.find({});
 
   const categories = await Categories.find({});
   res.render('site/post', { layout: null, post, categories });
+}catch (error) {
+  console.error(error);
+  res.status(500).send(`Bir hata oluştu: ${error.message}`); // Hata durumunda uygun bir hata mesajı gönder
+}
 
 });
 
@@ -68,15 +65,11 @@ router.get('/category',checkAuth, async (req, res) => {
     // Verileri template'e gönderme
     res.render('site/category', { layout: null, categories });
   
-
-
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
-
 
 router.get('/posts/delete/:id',checkAuth, async (req, res) => {
   try {
@@ -98,23 +91,16 @@ router.get('/posts/delete/:id',checkAuth, async (req, res) => {
 
 router.get('/posts/edit/:id', checkAuth, async(req, res) => {
   const postId = req.params.id;
-
   try{
-
+const post= await Post.findById(postId) 
 const categories= await Categories.find({})
-res.render('site/edit-post', { layout:null, postId ,categories});
-
+res.render('site/edit-post', { layout:null, postId ,categories,post});
   }catch(error) {
-
     console.error(error);
     // Hata durumunda uygun bir hata mesajı göndermek veya hata sayfasına yönlendirmek gibi işlemler yapabilirsiniz.
     res.status(500).send('Bir hata oluştu.');
-
   }
-
 });
-
-
 router.post('/posts/edit/:id', checkAuth,async (req, res) => {
   try {
 
@@ -138,14 +124,12 @@ router.post('/posts/edit/:id', checkAuth,async (req, res) => {
   }
 });
 
-
 router.get('/login', (req, res) => {
   if (req.session.userId) {
     res.render('site/admin');
   } else {
-    res.render('login', { layout: null });
+    res.render('login',{ layout: null });
   }
 });
-
 
 module.exports = router;
