@@ -41,11 +41,38 @@ router.post('/categories/edit/:id',checkAuth, async (req, res) => {
 
 router.get('/blog/:category', async (req, res) => {
   try {
+
+     
+    const distinctAuthors = await Post.distinct('author'); // Tüm farklı yazar isimlerini getir
+    const { author, startDate, endDate } = req.query;
+
+    let authorPosts = [];
+
+    // Eğer yazar seçildiyse ve tarih aralığı belirlendiyse
+    if (author && startDate && endDate) {
+      // Tarihleri JavaScript Date objelerine çevirin
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+
+      console.log(start)
+
+      console.log(end)
+      
+      // Belirli yazarın ve belirli tarih aralığının yazılarını getir
+      authorPosts=await Post.find({
+        author: author,
+        date: { $gte: start, $lte: end }
+      });
+    } else if (author) {
+      // Eğer sadece yazar seçildiyse, tarih aralığı olmadan sorguyu yapın
+      authorPosts = await Post.find({ author: author });
+    }
+
     const { category } = req.params;
     const categories = await Categories.find({});
-    const posts = await Post.find({ category });
+    const posts = await Post.find({ category }).sort({date:'desc'});
 
-    res.render('site/category-page', { posts, categories });
+    res.render('site/category-page', { posts, categories ,authorPosts, distinctAuthors});
   } catch (error) {
     console.error(error);
 

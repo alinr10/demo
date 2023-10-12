@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <title>Yazılar</title>
   <link rel="stylesheet" href="css/adminstyle.css" />
-
 </head>
-
 <body>
   <div class="admin-panel">
     <div class="sidebar">
@@ -23,27 +21,24 @@
         </select>
       <ul class="post-list">
         <h3>Mevcut Yazılar</h3>
-
-<form action="/filter" method="get">
+<form action="/filter" method="GET">
   <label for="author">Yazara Göre:</label>
   <select id="author" name="author">
-{{#each distinctAuthors}}
-
-    <option value="{{this}}">{{this}}</option>
-
-{{/each}}
-
-  
-    <!-- Diğer yazarlar -->
+    {{#each distinctAuthors}}
+      <option value="{{this}}">{{this}}</option>
+    {{/each}}
   </select>
 
+  <label for="startDate">Başlangıç Tarihi:</label>
+  <input type="date" id="startDate" name="startDate">
 
+  <label for="endDate">Bitiş Tarihi:</label>
+  <input type="date" id="endDate" name="endDate">
 
   <button type="submit">Filtrele</button>
 </form>
 
-
-        {{#each posts}}
+ {{#each authorPosts}}
         <li>
           <strong>{{title}}</strong>
           <p>{{content}}</p> <br>

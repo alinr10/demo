@@ -1,6 +1,5 @@
 /* eslint-disable linebreak-style */
 const express = require('express');
-
 const router = express.Router();
 const Post = require('../models/Post');
 const Categories = require('../models/Categories');
@@ -12,20 +11,163 @@ router.get('/', (req, res) => {
   res.render('site/index');
 });
 
+router.get('/filter', async (req, res) => {
+  try {
+    const distinctAuthors = await Post.distinct('author'); // Tüm farklı yazar isimlerini getir
+    const { author, startDate, endDate } = req.query;
+
+    let authorPosts = [];
+
+    // Eğer yazar seçildiyse ve tarih aralığı belirlendiyse
+    if (author && startDate && endDate) {
+      // Tarihleri JavaScript Date objelerine çevirin
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+
+      console.log(start)
+
+      console.log(end)
+      
+      // Belirli yazarın ve belirli tarih aralığının yazılarını getir
+      authorPosts=await Post.find({
+        author: author,
+        date: { $gte: start, $lte: end }
+      });
+    } else if (author) {
+      // Eğer sadece yazar seçildiyse, tarih aralığı olmadan sorguyu yapın
+      authorPosts = await Post.find({ author: author });
+    }
+
+    // Elde edilen sonuçları kullanarak işlemlerinizi gerçekleştirin
+    // ...
+
+    res.render('site/filtered-post', { layout: null, authorPosts, distinctAuthors });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+router.get('/filt', async (req, res) => {
+  try {
+    const distinctAuthors = await Post.distinct('author'); // Tüm farklı yazar isimlerini getir
+    const { author, startDate, endDate } = req.query;
+
+    let authorPosts = [];
+
+    // Eğer yazar seçildiyse ve tarih aralığı belirlendiyse
+    if (author && startDate && endDate) {
+      // Tarihleri JavaScript Date objelerine çevirin
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+
+      console.log(start)
+
+      console.log(end)
+      
+      // Belirli yazarın ve belirli tarih aralığının yazılarını getir
+      authorPosts=await Post.find({
+        author: author,
+        date: { $gte: start, $lte: end }
+      });
+    } else if (author) {
+      // Eğer sadece yazar seçildiyse, tarih aralığı olmadan sorguyu yapın
+      authorPosts = await Post.find({ author: author });
+    }
+
+    // Elde edilen sonuçları kullanarak işlemlerinizi gerçekleştirin
+    // ...
+
+    res.render('site/filtered-blog', {authorPosts, distinctAuthors});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// router.get('/filterblog', async (req, res) => {
+//   try {
+//     const distinctAuthors = await Post.distinct('author'); // Tüm farklı yazar isimlerini getir
+//     const { author, startDate, endDate } = req.query;
+
+//     let authorPosts = [];
+
+//     // Eğer yazar seçildiyse ve tarih aralığı belirlendiyse
+//     if (author && startDate && endDate) {
+//       // Tarihleri JavaScript Date objelerine çevirin
+//       const start = new Date(startDate);
+//       const end = new Date(endDate);
+
+//       console.log(start)
+
+//       console.log(end)
+      
+//       // Belirli yazarın ve belirli tarih aralığının yazılarını getir
+//       authorPosts=await Post.find({
+//         author: author,
+//         date: { $gte: start, $lte: end }
+//       });
+//     } else if (author) {
+//       // Eğer sadece yazar seçildiyse, tarih aralığı olmadan sorguyu yapın
+//       authorPosts = await Post.find({ author: author });
+//     }
+
+//     // Elde edilen sonuçları kullanarak işlemlerinizi gerçekleştirin
+//     // ...
+
+//     res.render('site/blog', { authorPosts:authorPosts, distinctAuthors:distinctAuthors });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: 'Internal Server Error' });
+//   }
+// });
+
+
+
 router.get('/about', (req, res) => {
   res.render('site/about');
 });
 
+
+
+
 router.get('/blog', async (req, res) => {
   try {
+
+
+    const distinctAuthors = await Post.distinct('author'); // Tüm farklı yazar isimlerini getir
+    const { author, startDate, endDate } = req.query;
+
+    let authorPosts = [];
+
+    // Eğer yazar seçildiyse ve tarih aralığı belirlendiyse
+    if (author && startDate && endDate) {
+      // Tarihleri JavaScript Date objelerine çevirin
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+
+      console.log(start)
+
+      console.log(end)
+      
+      // Belirli yazarın ve belirli tarih aralığının yazılarını getir
+      authorPosts=await Post.find({
+        author: author,
+        date: { $gte: start, $lte: end }
+      });
+    } else if (author) {
+      // Eğer sadece yazar seçildiyse, tarih aralığı olmadan sorguyu yapın
+      authorPosts = await Post.find({ author: author });
+    }
+
+    
     // Post collection'ından veri çekme
-    const posts = await Post.find({});
+    const posts = await Post.find({}).sort({date:'desc'});
 
     // Categories collection'ından veri çekme
     const categories = await Categories.find({});
 
     // Verileri template'e gönderme
-    res.render('site/blog', { posts, categories });
+    res.render('site/blog', { posts, categories,authorPosts, distinctAuthors});
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -41,12 +183,22 @@ router.get('/admin', checkAuth,(req, res) => {
  
 });
 
+
 router.get("/posts",checkAuth,async (req,res)=>{
-try{
+
+  try{
+
+   const distinctAuthors = await Post.distinct('author'); // Tüm farklı yazar isimlerini getir
+    const { author } = req.query;
+
+    let authorPosts = [];
+    if (author) {
+      authorPosts = await Post.find({ author: author }).sort({date:'desc'}); // Belirli yazarın yazılarını getir
+    }
+  
 const posts= await Post.find({})
 
-res.render("site/posts",{posts:posts,layout:null})
-
+res.render("site/posts",{posts:posts,layout:null,distinctAuthors})
 
 }catch(error){
 console.error(error);

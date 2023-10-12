@@ -52,10 +52,36 @@
       <aside id="aside" class="col-md-4">
 
         <div class="widget">
-          <div class="widget-search">
+
+
+<form action="/blog/{{posts._id}}" method="GET">
+  <label for="author">Yazara Göre:</label>
+  <select id="author" name="author">
+    {{#each distinctAuthors}}
+      <option value="{{this}}">{{this}}</option>
+    {{/each}}
+  </select>
+
+  <label for="startDate">Başlangıç Tarihi:</label>
+  <input type="date" id="startDate" name="startDate">
+
+  <label for="endDate">Bitiş Tarihi:</label>
+  <input type="date" id="endDate" name="endDate">
+
+  <button type="submit">Filtrele</button>
+  
+</form>
+
+
+
+
+
+
+
+          {{!-- <div class="widget-search">
             <input class="search-input form-control" type="text" placeholder="Search" />
             <button class="search-btn" type="button"><i class="fas fa-search"></i></button>
-          </div>
+          </div> --}}
         </div>
         <!-- /Search -->
 

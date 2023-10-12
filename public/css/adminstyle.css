@@ -78,8 +78,8 @@ margin-left: 260px;
 
 .post-list {
   
-    list-style: none;
-    padding: 0;
+    position: relative;
+    margin-right: 200px;
 }
 
 .post-list li {
@@ -99,3 +99,16 @@ margin-left: 260px;
 .post-list li a:hover {
     text-decoration: underline;
 }
+
+.filter-button {
+    position: absolute;
+    top: 0;
+    right: -180px; /* Filtrele butonunu sağa kaydırarak pozisyon ayarı yapabilirsiniz */
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
