@@ -21,6 +21,8 @@
         </select>
       <ul class="post-list">
         <h3>Mevcut Yazılar</h3>
+
+
 <form action="/filter" method="GET">
   <label for="author">Yazara Göre:</label>
   <select id="author" name="author">
@@ -28,7 +30,7 @@
       <option value="{{this}}">{{this}}</option>
     {{/each}}
   </select>
-
+<br> <br>
   <label for="startDate">Başlangıç Tarihi:</label>
   <input type="date" id="startDate" name="startDate">
 
@@ -37,6 +39,9 @@
 
   <button type="submit">Filtrele</button>
 </form>
+
+
+
 
  {{#each authorPosts}}
         <li>

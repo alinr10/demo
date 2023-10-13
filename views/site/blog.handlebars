@@ -54,19 +54,19 @@
         <div class="widget">
 
   <form action="/filt" method="GET">
-  <label for="author">Yazara Göre:</label>
+  <label for="author">Yazara Göre:</label> <br>
   <select id="author" name="author">
     {{#each distinctAuthors}}
       <option value="{{this}}">{{this}}</option>
     {{/each}}
   </select>
-
-  <label for="startDate">Başlangıç Tarihi:</label>
+<br>
+  <label for="startDate">Başlangıç Tarihi:</label> <br>
   <input type="date" id="startDate" name="startDate">
-
-  <label for="endDate">Bitiş Tarihi:</label>
+<br>
+  <label for="endDate">Bitiş Tarihi:</label> <br>
   <input type="date" id="endDate" name="endDate">
-
+<br> <br>
   <button type="submit">Filtrele</button>
   
 </form>
