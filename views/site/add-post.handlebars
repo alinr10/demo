@@ -25,28 +25,36 @@
       <h3>Yeni Post Ekle</h3>
 
       <div class="pst">
-      <form action="/posts" method="post" enctype="multipart/form-data">
+        <form action="/posts" method="post" enctype="multipart/form-data">
 
-        <input type="text" name="title" placeholder="Başlık" required />
-        <textarea name="content" placeholder="İçerik" required></textarea>
+          <input type="text" name="title" placeholder="Başlık" required />
 
-        <input type="text" name="author" placeholder="Yazar" required />
+          <textarea name="content" placeholder="İçerik" required></textarea>
 
-        <input type="file" id="myFile" name="post_image" />
 
-        <br>
-        <label for="category">Kategori:</label>
-        <select name="category" id="category">
-          {{#each categories}}
-          <option value="{{this._id}}">{{this.name}}</option>
-          {{/each}}
-          
-        </select>
-        <br /> <br>
-        <button class="button" type="submit">Ekle</button>
-      </form>
-  </div>
+
+
+
+          <input type="text" name="author" placeholder="Yazar" required />
+          <br> <br>
+
+          <input type="file" id="myFile" name="post_image" />
+
+          <br> <br>
+          <label for="category">Kategori:</label>
+
+          <select name="category" id="category">
+            {{#each categories}}
+            <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+
+          </select>
+          <br /> <br>
+          <button class="button" type="submit">Ekle</button>
+        </form>
+      </div>
     </div>
   </div>
 </body>
+
 </html>

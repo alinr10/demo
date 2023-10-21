@@ -1,22 +1,16 @@
-const mongoose = require("mongoose");
+import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
-const BlogPost = new Schema({
-  title: { type: String, require: true },
-
-  content: { type: String, require: true },
-
+const BlogPostSchema = new Schema({
+  title: { type: String, required: true },
+  content: { type: String, required: true },
   date: { type: Date, default: Date.now },
-
-  post_image: {
-    type: String,
-    require: true,
-  },
-  author: { type: String, require: true },
-
-  category:{type:String,require:true}
-
+  post_image: { type: String },
+  author: { type: String, required: true },
+  category: { type: String, required: true }
 });
 
-module.exports = mongoose.model("post", BlogPost);
+const BlogPostModel = mongoose.model('post', BlogPostSchema);
+
+export default BlogPostModel;

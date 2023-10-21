@@ -1,12 +1,9 @@
-// checkauth.js
-
 const checkAuth = (req, res, next) => {
-    if (req.session.userId) {
+  if (req.session.userId) {
       next();
-    } else {
+  } else {
       res.send('Giriş yetkiniz yok!');
-    }
-  };
-  
-  module.exports = checkAuth;
-  
+  }
+};
+
+export default checkAuth;

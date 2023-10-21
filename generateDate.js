@@ -1,8 +1,7 @@
-const moment =require('moment')
+import moment from 'moment';
 
-module.exports={
-generateDate:(date,format)=>{
-    return moment(date).format(format)
-}
+const generateDate = (date, format) => {
+    return moment(date).format(format);
+};
 
-}
+export { generateDate };

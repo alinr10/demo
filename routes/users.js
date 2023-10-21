@@ -1,24 +1,24 @@
-const express = require("express");
+import express from 'express';
 const router = express.Router();
-const Users = require("../models/User");
+import Users from '../models/User.js';
 
-router.post("/login", async (req, res) => {
+router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
     const user = await Users.findOne({ email });
 
-    if (user && user.password == password) {
+    if (user && user.password === password) {
       req.session.userId = user._id;
-      res.redirect("/admin");
+      res.redirect('/admin');
     } else {
-      res.redirect("/login");
-      console.log("else girdi");
+      res.redirect('/login');
+      console.log('else girdi');
     }
   } catch (error) {
     console.error(error);
-    res.status(500).send("Sunucu hatası");
+    res.status(500).send('Sunucu hatası');
   }
 });
 
-module.exports = router;
+export default router;
