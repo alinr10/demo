@@ -15,17 +15,18 @@ router.post('/writingai',checkAuth,async(req,res)=>{
 
   const {content}=req.body
 
-  let myBard = new Bard({
-    "__Secure-1PSID":''
-     ,
-    '__Secure-3PSID':''
-   
-  },{
+  let myBard = new Bard('cQimDbeXEnzqQZVlUrRxkceKed45Hlloc1lb0VszUhHmvzZlaANJxN9fWnCzf4wLyGROxA.',{
     verbose: true,
     fetch: fetch,
   }
   );
 
+  // {
+  //   "__Secure-1PSID":''
+  //    ,
+  //   '__Secure-3PSID':''
+   
+  // }
   const aicontent = await myBard.ask(`${content}`);
 
   req.session.aicontent = aicontent;
