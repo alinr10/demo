@@ -24,6 +24,7 @@ app.use(
     resave: false,
     saveUninitialized: true,
     store: MongoStore.create({ mongoUrl: 'mongodb://localhost:27017/demo_' }),
+    cookie: { secure: true }
   })
 );
 

@@ -1,12 +1,10 @@
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <title>Yazılar</title>
   <link rel="stylesheet" href="css/adminstyle.css" />
 </head>
-
 <body>
   <div class="admin-panel">
     <div class="sidebar">
@@ -20,7 +18,16 @@
       </ul>
     </div>
     <div class="content">
-      <h2>Yazılar</h2>
+
+<form action="/posts/writingai" method="post" enctype="multipart/form-data">
+
+
+          <textarea name="content" placeholder="içeriğin konusunu girin" >{{aicontent}}</textarea>
+
+
+      <button type="submit">AI ile içeriği yazdır</button>
+
+</form>
 
       <h3>Yeni Post Ekle</h3>
 

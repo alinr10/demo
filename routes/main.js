@@ -135,7 +135,10 @@ router.get('/add-post', checkAuth, async (req, res) => {
   try {
     const post = await Post.find({});
     const categories = await Categories.find({});
-    res.render('site/add-post', { layout: null, post, categories });
+    res.render('site/add-post', { layout: null, post, categories,aicontent: req.session.aicontent });
+
+    delete req.session.aicontent;
+
   } catch (error) {
     console.error(error);
     res.status(500).send(`Bir hata oluştu: ${error.message}`);

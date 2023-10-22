@@ -4,14 +4,16 @@ import Post from "../models/Post.js";
 import Categories from "../models/Categories.js";
 import checkAuth from "../checkauth.js";
 import Bard from "bard-ai";
+import AiPost from "../models/AiPost.js";
 
 
 
 const router = express.Router();
 
-router.post("/", checkAuth, async (req, res) => {
-  const { title, content, author, category } = req.body;
-  const { post_image } = req.files;
+
+router.post('/writingai',checkAuth,async(req,res)=>{
+
+  const {content}=req.body
 
   let myBard = new Bard({
     "__Secure-1PSID":''
@@ -26,13 +28,32 @@ router.post("/", checkAuth, async (req, res) => {
 
   const aicontent = await myBard.ask(`${content}`);
 
+  req.session.aicontent = aicontent;
+
+const newAiPost= await AiPost.create({content:aicontent})
+
+
+
+res.redirect("/add-post");
+
+
+})
+
+
+
+router.post("/", checkAuth, async (req, res) => {
+  const { title, content, author, category } = req.body;
+  const { post_image } = req.files;
+
+  
+
   try {
      const __dirname = path.resolve();
     await path.join(__dirname, 'public', 'img', 'postimages');
 
     const newPost = await Post.create({
       title,
-      content: aicontent,
+      content ,
       author,
       category,
       post_image: `img/postimages/${post_image.name}`,
